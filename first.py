@@ -3,7 +3,7 @@ import json
 
 url="https://api.telegram.org/bot1848540350:AAG5JclNyx3863mB19cvYGlx5K8Adlcvge4/"
 
-guide_note= "This quiz has 30 question and After each question you should submit your Answer with sending a NUMBER from 1-4 of choices. "
+guide_note= "This quiz has 25 questions and After each question you should submit your Answer by sending a NUMBER from 1-4 of choices. "
 
 def get_all_updates():
     response=requests.get(url + "getUpdates")
@@ -17,7 +17,7 @@ def get_chat_id(update):
 
 def sendMessage(chat_id , text):
     sendData={
-        "caht_id" : chat_id,
+        "chat_id" : chat_id,
         "text" : text
     }
 
