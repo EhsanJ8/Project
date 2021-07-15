@@ -76,7 +76,11 @@ def index():
                 user_id = msg['message']['from']['id']
                 users[user_id] = []
                 type[user_id] = "En_short_quiz"
+<<<<<<< HEAD
                 nokat = "آزمون آغاز شد!\nبرای پاسخ به گزینه ها لطفا به ترتیب یکی از اعداد 1 تا 3 یا 1 تا 4 را ارسال کنید\nبرای رد کردن سوال میتوانید عدد 0 را ارسال نمایید"
+=======
+                nokat = "آزمون آغاز شد!\nبرای پاسخ به گزینه ها لطفا به ترتیب یکی از اعداد 1 تا 3 یا 1 تا 4 را ارسال کنید"
+>>>>>>> 97a3851474b3c4e485585898dc315cfe62f57278
                 question = English1[0][0] + English1[0][1]
                 sendMessage(chat_id , nokat)
                 sendMessage(chat_id , question)
@@ -257,11 +261,4 @@ def index():
 write_json({} , "type.json")
 write_json({})
 app.run(debug=True)
-
-
-
-
-
-
-
 
