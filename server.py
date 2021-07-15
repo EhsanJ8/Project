@@ -6,6 +6,7 @@ import time
 from flask import Flask
 from flask import request
 from flask import Response
+import os
 
 app = Flask(__name__)
 
@@ -24,11 +25,9 @@ def get_all_updates(): #برای گرفتن پیام ها
 def get_last_update(allupdates):  #برای گرفتن آخرین پیام که از طرف کاربر ارسال شده
     return allupdates["result"][-1]
 
-def get_chat_id(update):
-    try:   #برای گرفتن چت آی دی کاربری که پیام را ارسال کرده
-        return update["message"]["chat"]["id"]
-    except:
-        pass
+def get_chat_id(update):   #برای گرفتن چت آی دی کاربری که پیام را ارسال کرده
+    return update["message"]["chat"]["id"]
+
 def sendMessage(chat_id , text):   #برای ارسال پیام به کاربر
     sendData={
         "chat_id" : chat_id,
@@ -79,7 +78,6 @@ def index():
                 users[str(user_id)].append((int(text) , False))
             write_json(users)
             users = read_json()
-            
             if len(users[str(user_id)]) != 25:
                 question = questions[len(users[str(user_id)])][0] + questions[len(users[str(user_id)])][1]
                 sendMessage(chat_id , question)
@@ -94,7 +92,7 @@ def index():
         return "<h1>Welcome</h1>"
 
 write_json({})
-app.run(debug=True)
+app.run(host="0.0.0.0" , port=int(os.environ('PORT' , 5000)))
 
 
 

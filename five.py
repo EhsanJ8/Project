@@ -1,9 +1,36 @@
-
+from typing import Text
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import Updater, CallbackQueryHandler
 import requests
 import json
 from flask import Flask
 from flask import request
 from flask import Response
+
+updater = Updater(token="1818253105:AAGz2CxtcaQabY7Bful3BolJkfXtjh4ymd4")
+dispatcher = updater.dispatcher
+msg = request.get_json()
+chat_id = get_chat_id[msg]
+def gozine3(bot , update):
+    button = [
+        [InlineKeyboardButton("A" , callback_data="1"),
+        InlineKeyboardButton("B", callback_data="2")],
+        [InlineKeyboardButton("C" , callback_data="3")],
+        [InlineKeyboardButton("Skip" , callback_data="0")]
+    ]
+    reply_markup = InlineKeyboardMarkup(button)
+    bot.send_message(chat_id , text=question , reply_markup=reply_markup)
+def gozine4(bot , update):
+    button = [
+        [InlineKeyboardButton("A" , callback_data="1"),
+        InlineKeyboardButton("B", callback_data="2")],
+        [InlineKeyboardButton("C" , callback_data="3"),
+        InlineKeyboardButton("D" , callback_data="4")]
+        [InlineKeyboardButton("Skip" , callback_data="0")]
+    ]
+    reply_markup = InlineKeyboardMarkup(button)
+    bot.send_message(chat_id , text=question , reply_markup=reply_markup)
+
 
 app = Flask(__name__)
 
@@ -15,10 +42,10 @@ English2 = [('1.Are you German?\nYes, ....\n', 'A)you are German\nB)I am\nC)he i
 javab_english2 = [2,1,1,3,1,2,1,1,3,2,2,1,3,3,1,2,1,1,2,1,2,1,3,2,3,2,1,1,3,2,1,2,3,2,1,1,2,1,2,3,2,2,3,1,3,2,2,1,3,3,1,2,1,1,2,1,2,1,3,2,3,3,1,1,3,2,1,2,3,2]
 france = [('1.Vous cherchez une chambre.\nVous allez ....\n', 'A)à l´hôtel\nB)au café\nC)au restaurant'), ('2.Il mange parce qu´il a ....\n', 'A)chaud\nB)faim\nC)soif'), ('3.Vous ... du sport?\n', 'A)aimez\nB)faites\nC)fais'), ('4.Quand monsieur Dubois a soif, ....\n', 'A)nous allons au bureau.\nB)il va au café.\nC)elle va à Paris.'), ('5.Demandez à l´employé la clé de la chambre.\n.... ?\n', "A)Pouvez-vous me montrer ma chambre ?\nB)Puis-je avoir la clé de la chambre S.V.P. ?\nC)Pouvez-vous prendre la clé de la chambre S.V.P. ?"), ('6.Cette maison est très ....\n', 'A)vieille\nB)grand\nC)vieux'), ('7.Où sont les livres de papa?\n... livres sont sur ... bureau.\n', 'A)son - sa\nB)leurs - son\nC)ses - son'), ('8.Vous allez souvent au théâtre?\nJe ne ....\n', 'A)pars pas\nB)le retiens pas\nC)sors jamais le soir'), ('9.Cette veste rouge est à vous madame?\n....\n', 'A)Oui, c´est moi.\nB)Oui, c´est à moi.\nC)Non, pas moi.'), ('10.J´ai besoin d´une voiture.\nC´est pourquoi ....\n', 'A)j´ai acheté une voiture.\nB)je vends ma voiture.\nC)je vais prendre le train.'), ('11.La moto coûte moins cher que la voiture.\n....\n', 'A)Il est aussi cher.\nB)Elle est meilleur marché.\nC)La voiture est meilleur marché.'), ('12.Madame Dupont va faire des courses parce qu´elle ....\n', 'A)a acheté un cheval.\nB)est très sportive.\nC)a besoin d´acheter de la nourriture.'), ('13.Pourquoi voulez-vous acheter cette machine à laver ?\n....\n', 'A)Il est pratique.\nB)Il est moins cher que les autres.\nC)C´est le dernier modèle.'), ('14.Quand êtes-vous arrivés?\n....\n', 'A)Je suis arrivé hier.\nB)Nous sommes arrivés hier.\nC)Il est arrivé à l´hôtel.'), ('15.Il a essayé de garer sa voiture, mais il n´a ....\n', 'A)pas réussi.\nB)pas voulu.\nC)pas demandé.'), ('16.Je vais mettre la robe ... j´ai achetée hier.\n', 'A)qui\nB)que\nC)qu´'), ('17.Demain matin, elle ... le train pour Paris.\n', 'A)prenais\nB)prendra\nC)prendras'), ('18.Un ami ... chez moi demain soir.\n', 'A)venir\nB)viendra\nC)viendrait'), ('19.... tu as invité à ton anniversaire?\n', 'A)Qu´est-ce qui\nB)Qui est-ce que\nC)Qui est-ce qui'), ('20.J´apprécie beaucoup cet endroit, ....\n', 'A)c´est tellement calme.\nB)c´est trop modeste.\nC)elle est sympathique.'), ('21.C´est l´anniversaire de ma mère.\nJe ... téléphone.\n', 'A)la\nB)leur\nC)lui'), ('22.Il y a beaucoup de clients qui attendent dans le magasin.\nLa vendeuse est débordée, elle ....\n', 'A)ne veut pas travailler.\nB)est très fatigué.\nC)a beaucoup de travail.'), ("23.Qui t'a attendu?\n....\n", "A)Je n'ai attendu personne.\nB)Personne ne m'a attendu.\nC)Je ne l'ai pas attendu."), ('24.Quelqu´un a envoyé ces fleurs à Sylvie.\n....\n', 'A)Qui est-ce qui les a envoyés?\nB)Qu´est-ce qu´il a envoyé?\nC)Qui est-ce qui les a envoyées?'), ("25.Si j'ai de l'argent, je ... cent euros.\n", 'A)te donnais\nB)te donnerai\nC)te donnerais') ,('26.Je lui ai téléphoné hier.\nIl m´a dit qu´il ... ce soir à huit heures.\n', 'A)arrivera\nB)arriverai\nC)arriverait'), ('27.Je suis invitée ce weekend.\n....\n', "A)J'ai été invité par Gisèle.\nB)Il l'a invitée.\nC)J'ai été invitée par Jean."), ('28.Si vous ... le temps la semaine prochaine, viendriez-vous à Paris avec moi?\n', 'A)auriez\nB)aviez\nC)avez'), ('29.Pourvu que le représentant ... à l´heure à la réunion de demain.\n', 'A)est\nB)serait\nC)soit'), ('30.Je suis désolé que vous ne ... pas venir à la soirée.\n', "A)pourrez\nB)pouviez\nC)puissiez")]
 javab_france = [1,2,2,2,2,1,3,3,2,1,2,3,3,2,1,2,2,2,2,1,3,3,2,3,2,3,3,2,3,3]
-spanish = [("1.Pedro ... chileno.\n" , "A)es.\nB)está.\nC)estamos." ),("2.Tú ... muy simpático pero ahora ... enfadado.\n","A)sois / son.\nB)eres / estás.\nC)estás / eres."),("3.Nosotros ... varios idiomas, por ejemplo castellano.\n","A)vivimos.\nB)escribir.\nC)hablamos."),("4.Vosotras ... una gran paella.\n","A)comen.\nB)comes.\nC)cocináis."),("5.Ellos ... las manos con jabón.\n","A)se lavan.\nB)se duchan.\nC)se levantan."),("6.En esta ciudad hay ... lugares muy turísticos.\n","A)un\nB)unos\nC)unas"),("7.¿Dónde ... und farmacia en esta ciudad?\n","A)son\nB)hay\nC)está"),("8.La ... del ... no es grande.\n","A)casas / pueblos\nB)pueblo / casa\nC)casa / pueblo"),("9.... casa es antigua pero ... es muy moderna.\n","A)Esta / aquella\nB)Este / aquel\nC)Esa / este"),("10.Yo estoy ... y/pero tú no estás ....\n","A)habliendo / cantado\nB)comando / saltando\nC)hablando / escuchando"),("11.Esta semana ... en Berlín.\n","A)ha llegado\nB)he estado\nC)ha estado"),("12.Hoy por la mañana me he ... de mal humor.\n","A)despertó\nB)despertado\nC)despertando"),("13.¿... hablar castellano?\n","A)Sabes\nB)Tienes\nC)Has"),("14.... te llamas y ... estudias?\n","A)Cómo / dónde\nB)Como / donde\nC)Dónde / cuántos"),("15.Aquellas chaquetas son ... y las de la ventana son las ....\n","A)esas / aquellas\nB)tus / mis\nC)nuestras / suyas"),("16.Mario, ordena ... cosas, por favor!\n","A)tus\nB)tuyas\nC)tu"),("17.José ... mucho en su próximo examen.\n","A)pienso\nB)piensa\nC)pensa"),("18.Este avión ... a México.\n","A)vola\nB)vuela\nC)vuelo"),("19.Ellos ... a los niños temprano.\n","A)acostan\nB)acuesta\nC)acuestan"),("20.Nosotras ... perfectamente.\n","A)conducís\nB)conducimos\nC)conducemos"),("21.El próximo año ... a Latinoamérica.\n","A)viajare\nB)viajar\nC)viajaré"),("22.Mañana ... y luego ... a la universidad.\n","A)estudiaré / iré\nB)estudié / fui\nC)estudio / fui"),("23.... una vez una pequeña niña que ... Caperucita Roja.\n","A)Había / se llamaba\nB)Hay / llamó\nC)Hubo / llamó"),("24. ... este periódico pero no lo ....\n","A)Leelo / desordenes\nB)Lee / desordenes\nC)Lea / desordena"),("25.  ..., ... la música más alto, por favor.\n","A)Oiga / pon\nB)Oye / pon\nC)Oiga / pone"),("26.Le preparo un café (a él) Sí, ....\n","A)prepáratelo\nB)prepáramelo\nC)prepáraselo"),("27.Te reparo el reloj? Sí, ... por favor.\n","A)repáramelo\nB)repáratelo\nC)repáraselo"),("28.Anteayer ... que trabajar todo el día.\n","A)tengo\nB)tiene\nC)tuve"),("29.Ella impide que ... la carta.\n","A)abrió\nB)abra\nC)abro"),("30.Si yo ... dinero ... en una isla.\n","A)tuvieses / vivirías\nB)tuviese / viviría\nC)tendería / vivir")]
+spanish = [("1.Pedro ... chileno.\n" , "A)es.\nB)está.\nC)estamos." ),("2.Tú ... muy simpático pero ahora ... enfadado.\n","A)sois / son.\nB)eres / estás.\nC)estás / eres."),("3.Nosotros ... varios idiomas, por ejemplo castellano.\n","A)vivimos.\nB)escribir.\nC)hablamos."),("4.Vosotras ... una gran paella.\n","A)comen.\nB)comes.\nC)cocináis."),("5.Ellos ... las manos con jabón.\n","A)se lavan.\nB)se duchan.\nC)se levantan."),("6.En esta ciudad hay ... lugares muy turísticos.\n","A)un\nB)unos\nC)unas"),("7.¿Dónde ... und farmacia en esta ciudad?\n","A)son\nB)hay\nC)está"),("8.La ... del ... no es grande.\n","A)casas / pueblos\nB)pueblo / casa\nC)casa / pueblo"),("9.... casa es antigua pero ... es muy moderna.\n","A)Esta / aquella\nB)Este / aquel\nC)Esa / este"),("10.Yo estoy ... y/pero tú no estás ....\n","A)habliendo / cantado\nB)comando / saltando\nC)hablando / escuchando"),("11.Esta semana ... en Berlín.\n","A)ha llegado\nB)he estado\nC)ha estado"),("12.Hoy por la mañana me he ... de mal humor.\n","A)despertó\nB)despertado\nC)despertando"),("13.¿... hablar castellano?\n","A)Sabes\nB)Tienes\nC)Has"),("14.... te llamas y ... estudias?\n","A)Cómo / dónde\nB)Como / donde\nC)Dónde / cuántos"),("15.Aquellas chaquetas son ... y las de la ventana son las ....\n","A)esas / aquellas\nB)tus / mis\nC)nuestras / suyas"),("16.Mario, ordena ... cosas, por favor!\n","A)tus\nB)tuyas\nC)tu"),("17.José ... mucho en su próximo examen.\n","A)pienso\nB)piensa\nC)pensa"),("18.Este avión ... a México.\n","A)vola\nB)vuela\nC)vuelo"),("19.Ellos ... a los niños temprano.\n","A)acostan\nB)acuesta\nC)acuestan"),("20.Nosotras ... perfectamente.\n","A)conducís\nB)conducimos\nC)conducemos"),("21.El próximo año ... a Latinoamérica.\n","A)viajare\nB)viajar\nC)viajaré"),("22.Mañana ... y luego ... a la universidad.\n","A)estudiaré / iré\nB)estudié / fui\nC)estudio / fui"),("23.... una vez una pequeña niña que ... Caperucita Roja.\n","A)Había / se llamaba\nB)Hay / llamó\nC)Hubo / llamó"),("24. ... este periódico pero no lo ....\n","A)Leelo / desordenes\nB)Lee / desordenes\nC)Lea / desordena"),("25.  ..., ... la música más alto, por favor.\n","A)Oiga / pon\nB)Oye / pon\nC)Oiga / pone"),("26.Le preparo un café (a él) Sí, ....\n","A)prepáratelo\nB)prepáramelo\nC)prepáraselo"),("27.Te reparo el reloj? Sí, ... por favor.\n","A)repáramelo\nB)repáratelo\nC)repáraselo"),("28.Anteayer ... que trabajar todo el día.\n","A)tengo\nB)tiene\nC)tuve"),("29.Ella impide que ... la carta.\n","A)abrió\nB)abra\nC)abro"),("30.Si yo ... dinero ... en una isla.\n","A)tuvieses / vivirías\nB)tuviese / viviría\nC)tendería /vivir")]
 spa_answer=[1,2,3,3,1,2,2,3,1,3,2,2,1,1,3,1,2,2,3,2,3,1,1,2,2,3,1,3,2,2]
 
-url="https://api.telegram.org/bot1848540350:AAG5JclNyx3863mB19cvYGlx5K8Adlcvge4/"
+url="https://api.telegram.org/bot1818253105:AAGz2CxtcaQabY7Bful3BolJkfXtjh4ymd4/"
 
 def get_all_updates(): #برای گرفتن پیام ها
     response=requests.get(url + "getUpdates")
@@ -66,7 +93,7 @@ def index():
                 first_name = msg['message']['from']['first_name']
             except:
                 first_name = 'کاربر'
-            guide_note2 = "سلام"+first_name+"عزیز 👋\nبه ربات تعیین سطح زبان خوش آمدید\nاین ربات شامل:\nیک تست انگلیسی کوتاه که شامل 25 سوال سه و چهارگزینه ای: /English_quick_test\nیک تست انگلیسی کامل که شامل 70 سوال سه گزینه ای: /English_test\n یک تست فرانسوی شامل 30 تست سه گزینه ای: /French_test\nو یک تست اسپانیایی که شمال 30 تست سه گزینه ای است میباشد : /Sapnish_test\nبرای شروع آزمون تست مورد نظر را انتخاب کنید."
+            guide_note2 = "سلام"+first_name+"عزیز 👋\nبه ربات تعیین سطح زبان خوش آمدید\nاین ربات شامل:\nیک تست انگلیسی کوتاه که شامل 25 سوال سه و چهارگزینه ای: /English_quick_test\nیک تست انگلیسی کامل که شامل 70 سوال سه گزینه ای: /English_test\nو یک تست فرانسوی که شامل 30 تست سه گزینه ای است میباشد: /French_test\nبرای شروع آزمون تست مورد نظر را انتخاب کنید."
             # return Response('ok' , status=200)
             if text == '/start':
                 sendMessage(chat_id , guide_note2)
@@ -76,7 +103,7 @@ def index():
                 user_id = msg['message']['from']['id']
                 users[user_id] = []
                 type[user_id] = "En_short_quiz"
-                nokat = "آزمون آغاز شد!\nبرای پاسخ به گزینه ها لطفا به ترتیب یکی از اعداد 1 تا 3 یا 1 تا 4 را ارسال کنید\nبرای رد کردن سوال میتوانید عدد 0 را ارسال نمایید"
+                nokat = "آزمون آغاز شد!\nبرای پاسخ به گزینه ها لطفا به ترتیب یکی از اعداد 1 تا 3 یا 1 تا 4 را ارسال کنید"
                 question = English1[0][0] + English1[0][1]
                 sendMessage(chat_id , nokat)
                 sendMessage(chat_id , question)
@@ -247,8 +274,6 @@ def index():
                             results += str(index+1)+' : '+'✅'+'\n'
                         index += 1
                     sendMessage(chat_id , results)
-                    again = "تست دیگری را شروع کنید!\n/English_quick_test\n/English_test\n/French_test\n/Spanish_test"
-                    sendMessage(chat_id , again)
             return Response('ok' , status=200)
         except:
             return Response('ok' , status = 200)

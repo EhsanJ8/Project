@@ -26,6 +26,7 @@ def sendMessage(chat_id , text):
 
 data=get_all_updates()
 lastupdate=get_last_update(data)
+
 if lastupdate["message"]["text"]=="/start":
     sendMessage(get_chat_id(lastupdate),guide_note)
 
